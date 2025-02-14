@@ -1,4 +1,4 @@
-package org.example;
+package com.recargapay.wallet;
 
 public class Main {
     public static void main(String[] args) {
