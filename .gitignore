@@ -1,0 +1,34 @@
+# Arquivos e pastas gerados pelo IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+.gradle/
+
+
+# Logs
+logs/
+*.log
+
+# Arquivos de compilação
+out/
+build/
+target/
+
+*.jar
+*.war
+*.ear
+
+# Configurações do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.class
+*.swp
+*.swo
+*.tmp
+
+# Configurações pessoais
+*.env
+*.bak
+*.backup
