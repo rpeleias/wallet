@@ -1,4 +1,4 @@
-package com.recargapay.wallet.port.in;
+package com.recargapay.wallet.port.in.command;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

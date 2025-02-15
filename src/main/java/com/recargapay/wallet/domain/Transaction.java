@@ -3,5 +3,34 @@ package com.recargapay.wallet.domain;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record Transaction(Long transactionId, String walletId, String type, float amount, LocalDateTime timestamp) {
+public class Transaction {
+
+    private Long walletId;
+    private TransactionType type;
+    private float amount;
+    private LocalDateTime transactionDate;
+
+    private Transaction(Long walletId, TransactionType type, float amount, LocalDateTime transactionDate) {
+        this.walletId = walletId;
+        this.type = type;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+    }
+
+    public static Transaction ofDeposity(Long walletId, BigDecimal value) {
+        return new Transaction(
+                walletId,
+                TransactionType.DEPOSIT,
+                value.floatValue(),
+                LocalDateTime.now()
+        );
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
 }

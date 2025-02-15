@@ -2,8 +2,8 @@ package com.recargapay.wallet.usecase;
 
 import com.recargapay.wallet.domain.Wallet;
 import com.recargapay.wallet.exception.WalletAlreadyExistsException;
-import com.recargapay.wallet.port.in.WalletCreationCommand;
-import com.recargapay.wallet.port.in.WalletCreationUseCase;
+import com.recargapay.wallet.port.in.command.WalletCreationCommand;
+import com.recargapay.wallet.port.in.usecase.WalletCreationUseCase;
 import com.recargapay.wallet.port.out.CreatedWallet;
 import com.recargapay.wallet.port.out.WalletRepositoryPort;
 
@@ -18,10 +18,10 @@ public class WalletCreationUseCaseImpl implements WalletCreationUseCase {
     @Override
     public CreatedWallet create(WalletCreationCommand walletCreationCommand) {
         walletRepositoryPort.findByUser(walletCreationCommand.getUserId()).ifPresent(userWallet -> {
-            throw new WalletAlreadyExistsException(userWallet.userId());
+            throw new WalletAlreadyExistsException(userWallet.getUserId());
         });
 
-        Wallet savedWallet = walletRepositoryPort.save(Wallet.of(walletCreationCommand.getUserId(), walletCreationCommand.getCurrency()));
+        Wallet savedWallet = walletRepositoryPort.saveOrUpdate(Wallet.of(walletCreationCommand.getUserId(), walletCreationCommand.getCurrency()));
 
         return CreatedWallet.of(savedWallet);
     }
