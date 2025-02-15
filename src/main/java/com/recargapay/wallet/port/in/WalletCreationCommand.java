@@ -7,16 +7,22 @@ public class WalletCreationCommand {
 
     @NotNull
     @NotEmpty
-    public Long userId;
+    private Long userId;
 
     @NotNull
     @NotEmpty
-    public String currency;
+    private String currency;
 
     public WalletCreationCommand(Long userId, String currency) {
         this.userId = userId;
         this.currency = currency;
+    }
 
+    public Long getUserId() {
+        return userId;
+    }
 
+    public String getCurrency() {
+        return currency;
     }
 }

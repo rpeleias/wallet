@@ -1,8 +1,8 @@
 package com.recargapay.wallet.port.in;
 
-import com.recargapay.wallet.port.out.WalletCreation;
+import com.recargapay.wallet.port.out.CreatedWallet;
 
 public interface WalletCreationUseCase {
 
-    WalletCreation create(WalletCreationCommand walletCreationCommand);
+    CreatedWallet create(WalletCreationCommand walletCreationCommand);
 }
