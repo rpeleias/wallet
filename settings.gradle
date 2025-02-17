@@ -1,2 +1,3 @@
-rootProject.name = 'wallet-core'
+rootProject.name = 'wallet'
+include 'core'
 
