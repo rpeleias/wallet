@@ -54,7 +54,6 @@ public class WalletTest {
         wallet.add(deposit);
 
         Transaction withdraw = Transaction.fromWithdraw(USER_ID, new BigDecimal(120));
-        wallet.add(withdraw);
 
         InsufficientBalanceException exception = assertThrows(InsufficientBalanceException.class, () -> {
             wallet.add(withdraw);

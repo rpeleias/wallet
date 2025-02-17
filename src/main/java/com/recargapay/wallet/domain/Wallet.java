@@ -31,8 +31,6 @@ public class Wallet {
     }
 
     public void add(Transaction transaction) {
-        transactions.add(transaction);
-
         switch (transaction.getType()) {
             case DEPOSIT:
                 processDeposit(transaction.getAmount());
@@ -41,17 +39,18 @@ public class Wallet {
                 processWithdrawal(transaction.getAmount());
                 break;
         }
+        transactions.add(transaction);
     }
 
     private void processDeposit(float amount) {
         this.amount += amount;
     }
 
-    private void processWithdrawal(float amount) {
-        if (this.amount <= 0) {
+    private void processWithdrawal(float withdrawAmount) {
+        if (this.amount <= withdrawAmount) {
             throw new InsufficientBalanceException(this.id, this.userId);
         }
-        this.amount -= amount;
+        this.amount -= withdrawAmount;
     }
 
     public Long getId() {
