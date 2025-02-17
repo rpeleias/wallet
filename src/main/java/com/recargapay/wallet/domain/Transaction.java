@@ -17,10 +17,19 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public static Transaction ofDeposity(Long walletId, BigDecimal value) {
+    public static Transaction fromDeposit(Long walletId, BigDecimal value) {
         return new Transaction(
                 walletId,
                 TransactionType.DEPOSIT,
+                value.floatValue(),
+                LocalDateTime.now()
+        );
+    }
+
+    public static Transaction fromWithdraw(Long walletId, BigDecimal value) {
+        return new Transaction(
+                walletId,
+                TransactionType.WITHDRAW,
                 value.floatValue(),
                 LocalDateTime.now()
         );

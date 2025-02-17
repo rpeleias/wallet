@@ -23,6 +23,6 @@ public class WalletCreationUseCaseImpl implements WalletCreationUseCase {
 
         Wallet savedWallet = walletRepositoryPort.saveOrUpdate(Wallet.of(walletCreationCommand.getUserId(), walletCreationCommand.getCurrency()));
 
-        return CreatedWallet.of(savedWallet);
+        return CreatedWallet.from(savedWallet);
     }
 }

@@ -1,23 +1,24 @@
 package com.recargapay.wallet.domain;
 
+import com.recargapay.wallet.exception.InsufficientBalanceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WalletTest {
+
+    private static final long USER_ID = 1L;
 
     private Wallet wallet;
 
     @BeforeEach
     void setUp() {
-        wallet = Wallet.of(1L, "USD");
+        wallet = Wallet.of(USER_ID, "USD");
     }
 
     @Test
@@ -30,36 +31,35 @@ public class WalletTest {
 
     @Test
     void whenDepositIsMadeThenAmountIsUpdated() {
-        Transaction transaction = mock(Transaction.class);
-        when(transaction.getType()).thenReturn(TransactionType.DEPOSIT);
-        when(transaction.getAmount()).thenReturn(100.0f);
-
+        Transaction transaction = Transaction.fromDeposit(USER_ID, new BigDecimal(100));
         wallet.add(transaction);
 
         assertThat(wallet.getAmount(), is(100.0f));
-        verify(transaction, times(1)).getType();
-        verify(transaction, times(1)).getAmount();
     }
 
     @Test
-    void testAddNonDepositTransaction() {
-        // Mock a Transaction
-        Transaction transaction = mock(Transaction.class);
-        when(transaction.getType()).thenReturn(TransactionType.WITHDRAW);
-        when(transaction.getAmount()).thenReturn(50.0f);
+    void whenWithdrawWithPositiveBalanceTransactionThenBalanceIsWitdrawed() {
+        Transaction deposit = Transaction.fromDeposit(USER_ID, new BigDecimal(100));
+        wallet.add(deposit);
 
-        wallet.add(transaction);
+        Transaction withdraw = Transaction.fromWithdraw(USER_ID, new BigDecimal(40));
+        wallet.add(withdraw);
 
-        assertThat(wallet.getAmount(), is(0.0f)); // Amount should not change
-        verify(transaction, times(1)).getType();
-        verify(transaction, never()).getAmount(); // Amount is not used for non-deposit transactions
+        assertThat(wallet.getAmount(), is(60.0f)); // Amount should not change
     }
 
     @Test
-    void testWalletWithNullId() {
-        Wallet walletWithNullId = Wallet.of(2L, "BRL");
-        assertThat(walletWithNullId.getId(), is(0L)); // Default ID as per the `of` method
-        assertThat(walletWithNullId.getUserId(), is(2L));
-        assertThat(walletWithNullId.getCurrency(), is("BRL"));
+    void whenWithdrawWithInvalidBalanceThenInsufficientBalanceEsceptionIsThrown() {
+        Transaction deposit = Transaction.fromDeposit(USER_ID, new BigDecimal(30));
+        wallet.add(deposit);
+
+        Transaction withdraw = Transaction.fromWithdraw(USER_ID, new BigDecimal(120));
+        wallet.add(withdraw);
+
+        InsufficientBalanceException exception = assertThrows(InsufficientBalanceException.class, () -> {
+            wallet.add(withdraw);
+        });
+
+        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 1 with insufficient balance!")); // Amount should not change/ Am
     }
 }
