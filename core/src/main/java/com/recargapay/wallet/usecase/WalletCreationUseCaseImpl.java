@@ -9,19 +9,19 @@ import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
 
 public class WalletCreationUseCaseImpl implements WalletCreationUseCase {
 
-    private final WalletRepositoryPort walletRepositoryPort;
+    private final WalletRepositoryPort walletRepositoryService;
 
-    public WalletCreationUseCaseImpl(WalletRepositoryPort walletRepositoryPort) {
-        this.walletRepositoryPort = walletRepositoryPort;
+    public WalletCreationUseCaseImpl(WalletRepositoryPort walletRepositoryService) {
+        this.walletRepositoryService = walletRepositoryService;
     }
 
     @Override
     public CreatedWallet create(WalletCreationCommand walletCreationCommand) {
-        walletRepositoryPort.findByUser(walletCreationCommand.getUserId()).ifPresent(userWallet -> {
+        walletRepositoryService.findByUser(walletCreationCommand.getUserId()).ifPresent(userWallet -> {
             throw new WalletAlreadyExistsException(userWallet.getUserId());
         });
 
-        Wallet savedWallet = walletRepositoryPort.saveOrUpdate(Wallet.of(walletCreationCommand.getUserId()));
+        Wallet savedWallet = walletRepositoryService.saveOrUpdate(Wallet.of(walletCreationCommand.getUserId()));
 
         return CreatedWallet.from(savedWallet);
     }
