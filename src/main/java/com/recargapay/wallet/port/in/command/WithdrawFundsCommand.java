@@ -15,7 +15,7 @@ public class WithdrawFundsCommand {
     @NotEmpty
     private BigDecimal value;
 
-    public WithdrawFundsCommand(Long walletId, BigDecimal value) {
+    private WithdrawFundsCommand(Long walletId, BigDecimal value) {
         this.walletId = walletId;
         this.value = value;
     }

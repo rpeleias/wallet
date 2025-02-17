@@ -2,6 +2,7 @@ package com.recargapay.wallet.domain;
 
 import com.recargapay.wallet.exception.InsufficientBalanceException;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,10 @@ public class Wallet {
 
     public void add(Transaction transaction) {
         switch (transaction.getType()) {
-            case DEPOSIT:
+            case DEPOSIT, TRANSFER_IN:
                 processDeposit(transaction.getAmount());
                 break;
-            case WITHDRAW:
+            case WITHDRAW, TRANSFER_OUT:
                 processWithdrawal(transaction.getAmount());
                 break;
         }
@@ -53,6 +54,14 @@ public class Wallet {
 
     public void calculateHistoricalAmount(List<Transaction> transactions) {
         transactions.forEach(this::add);
+    }
+
+    public void transfer(Wallet toWallet, float transferValue) {
+        Transaction fromTransaction = Transaction.fromTransferOut(this.getId(), BigDecimal.valueOf(transferValue));
+        Transaction toTransaction = Transaction.fromTransferIn(toWallet.getId(), BigDecimal.valueOf(transferValue));
+
+        this.add(fromTransaction);
+        toWallet.add(toTransaction);
     }
 
     public Long getId() {

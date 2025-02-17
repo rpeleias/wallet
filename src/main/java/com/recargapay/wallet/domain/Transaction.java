@@ -35,6 +35,25 @@ public class Transaction {
         );
     }
 
+    public static Transaction fromTransferIn(Long walletId, BigDecimal value) {
+        return new Transaction(
+                walletId,
+                TransactionType.TRANSFER_IN,
+                value.floatValue(),
+                LocalDateTime.now()
+        );
+    }
+    public static Transaction fromTransferOut(Long walletId, BigDecimal value) {
+        return new Transaction(
+                walletId,
+                TransactionType.TRANSFER_OUT,
+                value.floatValue(),
+                LocalDateTime.now()
+        );
+    }
+
+
+
     public TransactionType getType() {
         return type;
     }

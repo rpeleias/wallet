@@ -78,4 +78,36 @@ public class WalletTest {
 
         assertThat(wallet.getAmount(), is(120.0f)); // Amount should not change
     }
+
+    @Test
+    void whenFromTransactionIsInformedThenItShouldBeTransferred() {
+        Wallet fromWallet = Wallet.of(2L);
+        fromWallet.add(Transaction.fromDeposit(fromWallet.getId(), BigDecimal.valueOf(200.00)));
+
+        Wallet toWallet = Wallet.of(3L);
+        toWallet.add(Transaction.fromDeposit(fromWallet.getId(), BigDecimal.valueOf(300.00)));
+
+        fromWallet.transfer(toWallet, 100);
+
+        assertThat(fromWallet.getAmount(), is(100.0f));
+        assertThat(toWallet.getAmount(), is(400.0f));
+    }
+
+    @Test
+    void whenOvervaluedTransactionIsInformedThenInsufficientBalanceExceptionShouldBeThrown() {
+        Wallet fromWallet = Wallet.of(2L);
+        fromWallet.add(Transaction.fromDeposit(fromWallet.getId(), BigDecimal.valueOf(200.00)));
+
+        Wallet toWallet = Wallet.of(3L);
+        toWallet.add(Transaction.fromDeposit(fromWallet.getId(), BigDecimal.valueOf(300.00)));
+
+        InsufficientBalanceException exception = assertThrows(InsufficientBalanceException.class, () -> {
+            fromWallet.transfer(toWallet, 500);
+        });
+
+        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 2 with insufficient balance!")); // Amount should not change/ Am
+
+        assertThat(fromWallet.getAmount(), is(200.0f));
+        assertThat(toWallet.getAmount(), is(300.0f));
+    }
 }
