@@ -10,8 +10,8 @@ import java.util.Locale;
 
 public class MonetaryConverter {
 
-    public static String convert(float value, String currency, Locale locale) {
-        MonetaryAmount monetaryAmount = Money.of(value, Monetary.getCurrency(currency));
+    public static String convert(float value, Locale locale) {
+        MonetaryAmount monetaryAmount = Money.of(value, Monetary.getCurrency("USD"));
 
         MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(new Locale(locale.getLanguage(), locale.getCountry()));
         return format.format(monetaryAmount);

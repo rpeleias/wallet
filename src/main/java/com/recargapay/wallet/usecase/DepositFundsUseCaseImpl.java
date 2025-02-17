@@ -25,6 +25,6 @@ public class DepositFundsUseCaseImpl implements DepositFundsUseCase {
 
         walletRepositoryPort.saveOrUpdate(wallet);
 
-        return FundsDeposited.of(wallet.getId(), wallet.getUserId(), wallet.getAmount(), wallet.getCurrency());
+        return FundsDeposited.of(wallet.getId(), wallet.getUserId(), wallet.getAmount());
     }
 }

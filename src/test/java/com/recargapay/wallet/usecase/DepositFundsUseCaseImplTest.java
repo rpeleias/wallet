@@ -41,7 +41,7 @@ class DepositFundsUseCaseImplTest {
     @Test
     void whenWalletIsFoundThenDepositIsSucceeded() {
         long userId = 1L;
-        Wallet wallet = Wallet.of(userId, "USD");
+        Wallet wallet = Wallet.of(userId);
         BigDecimal initialDepositedValue = BigDecimal.valueOf(50.0f);
         wallet.add(Transaction.fromDeposit(wallet.getId(), initialDepositedValue));
         DepositFundsCommand command = DepositFundsCommand.of(wallet.getId(), 50.0f);

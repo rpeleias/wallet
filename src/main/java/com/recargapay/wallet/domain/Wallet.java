@@ -11,23 +11,21 @@ public class Wallet {
 
     private Long id;
     private Long userId;
-    private String currency;
     private LocalDateTime creationDate;
     private float amount;
     private List<Transaction> transactions;
 
-    public Wallet(Long id, Long userId, String currency, LocalDateTime creationDate, float amount) {
+    public Wallet(Long id, Long userId, LocalDateTime creationDate, float amount) {
         this.id = id;
         this.userId = userId;
-        this.currency = currency;
         this.creationDate = creationDate;
         this.amount = amount;
         this.transactions = new ArrayList<>();
     }
 
-    public static Wallet of(Long userId, String currency) {
+    public static Wallet of(Long userId) {
         Optional<Long> safeId = Optional.ofNullable(null);
-        return new Wallet(0L, userId, currency, LocalDateTime.now(), 0);
+        return new Wallet(0L, userId,LocalDateTime.now(), 0);
     }
 
     public void add(Transaction transaction) {
@@ -63,10 +61,6 @@ public class Wallet {
 
     public Long getUserId() {
         return userId;
-    }
-
-    public String getCurrency() {
-        return currency;
     }
 
     public float getAmount() {

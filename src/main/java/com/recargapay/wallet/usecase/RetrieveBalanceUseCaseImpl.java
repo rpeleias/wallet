@@ -18,6 +18,6 @@ public class RetrieveBalanceUseCaseImpl implements RetrieveBalanceUseCase {
     @Override
     public BalanceRetrieved retrieve(RetrieveBalanceCommand command) {
         Wallet wallet = walletRepositoryPort.findById(command.getWalletId()).orElseThrow(() -> new WalletNotFoundException(command.getWalletId()));
-        return BalanceRetrieved.from(wallet.getId(), wallet.getAmount(), wallet.getCurrency());
+        return BalanceRetrieved.from(wallet.getId(), wallet.getAmount());
     }
 }

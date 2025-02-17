@@ -20,13 +20,12 @@ public class WalletTest {
 
     @BeforeEach
     void setUp() {
-        wallet = Wallet.of(USER_ID, "USD");
+        wallet = Wallet.of(USER_ID);
     }
 
     @Test
     void whenAttributesIsInformedThenAWalletIsCreated() {
         assertThat(wallet.getUserId(), is(1L));
-        assertThat(wallet.getCurrency(), is("USD"));
         assertThat(wallet.getAmount(), is(0.0f));
         assertThat(wallet.getId(), is(0L));
     }

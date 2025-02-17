@@ -44,7 +44,7 @@ public class RetrieveHistoricalBalanceUseCaseTest {
 
     private static Wallet createWallet() {
         long userId = 1L;
-        Wallet wallet = Wallet.of(userId, "USD");
+        Wallet wallet = Wallet.of(userId);
         return wallet;
     }
 

@@ -21,7 +21,7 @@ public class WalletCreationUseCaseImpl implements WalletCreationUseCase {
             throw new WalletAlreadyExistsException(userWallet.getUserId());
         });
 
-        Wallet savedWallet = walletRepositoryPort.saveOrUpdate(Wallet.of(walletCreationCommand.getUserId(), walletCreationCommand.getCurrency()));
+        Wallet savedWallet = walletRepositoryPort.saveOrUpdate(Wallet.of(walletCreationCommand.getUserId()));
 
         return CreatedWallet.from(savedWallet);
     }

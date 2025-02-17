@@ -9,20 +9,11 @@ public class WalletCreationCommand {
     @NotEmpty
     private Long userId;
 
-    @NotNull
-    @NotEmpty
-    private String currency;
-
-    public WalletCreationCommand(Long userId, String currency) {
+    public WalletCreationCommand(Long userId) {
         this.userId = userId;
-        this.currency = currency;
     }
 
     public Long getUserId() {
         return userId;
-    }
-
-    public String getCurrency() {
-        return currency;
     }
 }

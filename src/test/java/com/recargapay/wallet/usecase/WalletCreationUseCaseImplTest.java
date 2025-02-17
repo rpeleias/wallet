@@ -40,8 +40,8 @@ public class WalletCreationUseCaseImplTest {
 
     @Test
     void whenNewUserIsInformedThenNewWalletIsCreated() {
-        WalletCreationCommand command = new WalletCreationCommand(NEW_USER_ID, "BRL");
-        Wallet savedWallet = Wallet.of(NEW_USER_ID, "BRL");
+        WalletCreationCommand command = new WalletCreationCommand(NEW_USER_ID);
+        Wallet savedWallet = Wallet.of(NEW_USER_ID);
 
         // when
         when(walletRepositoryPort.findByUser(NEW_USER_ID)).thenReturn(Optional.empty());
@@ -52,7 +52,6 @@ public class WalletCreationUseCaseImplTest {
         // then
         assertThat(createdWallet, is(notNullValue()));
         assertThat(createdWallet.getUserId(), is(NEW_USER_ID));
-        assertThat(createdWallet.getCurrency(), is("BRL"));
 
         verify(walletRepositoryPort, times(1)).findByUser(NEW_USER_ID);
         verify(walletRepositoryPort, times(1)).saveOrUpdate(any(Wallet.class));
@@ -61,8 +60,8 @@ public class WalletCreationUseCaseImplTest {
     @Test
     void whenExistingUserIsInformedThenWalletIsNotCreated() {
         // Arrange
-        WalletCreationCommand command = new WalletCreationCommand(EXISTING_USER_ID, "BRL");
-        Wallet existingWallet = Wallet.of(EXISTING_USER_ID, "BRL");
+        WalletCreationCommand command = new WalletCreationCommand(EXISTING_USER_ID);
+        Wallet existingWallet = Wallet.of(EXISTING_USER_ID);
 
         //when
         when(walletRepositoryPort.findByUser(EXISTING_USER_ID)).thenReturn(Optional.of(existingWallet));

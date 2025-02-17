@@ -32,7 +32,7 @@ public class RetrieveBalanceUseCaseImplTest {
 
     private static Wallet createWallet() {
         long userId = 1L;
-        Wallet wallet = Wallet.of(userId, "USD");
+        Wallet wallet = Wallet.of(userId);
         BigDecimal initialDepositedValue = BigDecimal.valueOf(100.0f);
         wallet.add(Transaction.fromDeposit(wallet.getId(), initialDepositedValue));
         return wallet;

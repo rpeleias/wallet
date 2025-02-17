@@ -27,6 +27,6 @@ public class RetrieveHistoricalBalanceUseCaseImpl implements RetrieveHistorialBa
         List<Transaction> transactions = transactionRepositoryPort.findByWalletIdBetweenDates(wallet.getId(), command.getFrom(), command.getTo());
         wallet.calculateHistoricalAmount(transactions);
 
-        return HistorialBalanceRetrieved.from(wallet.getId(), wallet.getAmount(), wallet.getCurrency(), transactions);
+        return HistorialBalanceRetrieved.from(wallet.getId(), wallet.getAmount(), transactions);
     }
 }

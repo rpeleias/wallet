@@ -25,6 +25,6 @@ public class WithdrawFundsUseCaseImpl implements WithdrawFundsUseCase {
 
         walletRepositoryPort.saveOrUpdate(wallet);
 
-        return FundsWithdrawed.of(wallet.getId(), wallet.getUserId(), wallet.getAmount(), wallet.getCurrency());
+        return FundsWithdrawed.of(wallet.getId(), wallet.getUserId(), wallet.getAmount());
     }
 }

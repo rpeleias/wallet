@@ -42,7 +42,7 @@ class WithdrawFundsUseCaseImplTest {
     @Test
     void whenWalletIsFoundThenWithdrawIsSucceeded() {
         long userId = 1L;
-        Wallet wallet = Wallet.of(userId, "USD");
+        Wallet wallet = Wallet.of(userId);
         BigDecimal initialDepositedValue = BigDecimal.valueOf(50.0f);
         wallet.add(Transaction.fromDeposit(wallet.getId(), initialDepositedValue));
 
@@ -66,7 +66,7 @@ class WithdrawFundsUseCaseImplTest {
     @Test
     void whenWalletIsFoundThenWithdrawWithInsufficientBalanceException() {
         long userId = 1L;
-        Wallet wallet = Wallet.of(userId, "USD");
+        Wallet wallet = Wallet.of(userId);
         BigDecimal initialDepositedValue = BigDecimal.valueOf(50.0f);
         wallet.add(Transaction.fromDeposit(wallet.getId(), initialDepositedValue));
 
