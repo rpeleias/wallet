@@ -5,7 +5,7 @@ import com.recargapay.wallet.domain.Wallet;
 import com.recargapay.wallet.exception.WalletNotFoundException;
 import com.recargapay.wallet.port.in.command.RetrieveBalanceCommand;
 import com.recargapay.wallet.port.out.BalanceRetrieved;
-import com.recargapay.wallet.port.out.WalletRepositoryPort;
+import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class RetrieveBalanceUseCaseImplTest {
+public class RetrieveBalanceUseCaseImplTest {
 
     @Mock
     private WalletRepositoryPort walletRepositoryPort;

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -60,5 +62,21 @@ public class WalletTest {
         });
 
         assertThat(exception.getMessage(), is("Wallet with id 0 from userId 1 with insufficient balance!")); // Amount should not change/ Am
+    }
+
+    @Test
+    void whenManyTransactionsAreAddedThenHistoricalAmountIsCalculated() {
+        Transaction depositOne = Transaction.fromDeposit(USER_ID, new BigDecimal(100));
+        Transaction depositTwo = Transaction.fromDeposit(USER_ID, new BigDecimal(100));
+        Transaction withdraw = Transaction.fromWithdraw(USER_ID, new BigDecimal(80));
+
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(depositOne);
+        transactions.add(depositTwo);
+        transactions.add(withdraw);
+
+        wallet.calculateHistoricalAmount(transactions);
+
+        assertThat(wallet.getAmount(), is(120.0f)); // Amount should not change
     }
 }

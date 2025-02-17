@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public class Wallet {
 
-    private final Long id;
-    private final Long userId;
-    private final String currency;
-    private final LocalDateTime creationDate;
+    private Long id;
+    private Long userId;
+    private String currency;
+    private LocalDateTime creationDate;
     private float amount;
-    private final List<Transaction> transactions;
+    private List<Transaction> transactions;
 
     public Wallet(Long id, Long userId, String currency, LocalDateTime creationDate, float amount) {
         this.id = id;
@@ -51,6 +51,10 @@ public class Wallet {
             throw new InsufficientBalanceException(this.id, this.userId);
         }
         this.amount -= withdrawAmount;
+    }
+
+    public void calculateHistoricalAmount(List<Transaction> transactions) {
+        transactions.forEach(this::add);
     }
 
     public Long getId() {

@@ -5,7 +5,7 @@ import com.recargapay.wallet.exception.WalletNotFoundException;
 import com.recargapay.wallet.port.in.command.RetrieveBalanceCommand;
 import com.recargapay.wallet.port.in.usecase.RetrieveBalanceUseCase;
 import com.recargapay.wallet.port.out.BalanceRetrieved;
-import com.recargapay.wallet.port.out.WalletRepositoryPort;
+import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
 
 public class RetrieveBalanceUseCaseImpl implements RetrieveBalanceUseCase {
 

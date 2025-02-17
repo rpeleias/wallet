@@ -4,7 +4,7 @@ import com.recargapay.wallet.domain.Wallet;
 import com.recargapay.wallet.exception.WalletAlreadyExistsException;
 import com.recargapay.wallet.port.in.command.WalletCreationCommand;
 import com.recargapay.wallet.port.out.CreatedWallet;
-import com.recargapay.wallet.port.out.WalletRepositoryPort;
+import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
