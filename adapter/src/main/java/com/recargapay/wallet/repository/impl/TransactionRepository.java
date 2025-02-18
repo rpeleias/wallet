@@ -1,7 +1,6 @@
 package com.recargapay.wallet.repository.impl;
 
 import com.recargapay.wallet.repository.entity.TransactionEntity;
-import com.recargapay.wallet.repository.entity.WalletEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

@@ -59,7 +59,6 @@ public class WalletCreationUseCaseImplTest {
 
     @Test
     void whenExistingUserIsInformedThenWalletIsNotCreated() {
-        // Arrange
         WalletCreationCommand command = new WalletCreationCommand(EXISTING_USER_ID);
         Wallet existingWallet = Wallet.of(EXISTING_USER_ID);
 

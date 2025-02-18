@@ -4,6 +4,7 @@ import com.recargapay.wallet.domain.Wallet;
 import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
 import com.recargapay.wallet.repository.entity.WalletEntity;
 import com.recargapay.wallet.repository.impl.WalletRepository;
+import com.recargapay.wallet.repository.mapper.WalletMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,20 +21,24 @@ public class WalletServicePortImpl implements WalletRepositoryPort {
     @Override
     public Optional<Wallet> findByUser(Long userId) {
         Optional<WalletEntity> optionalUserWallet = walletRepository.findByUserId(userId);
-        WalletEntity walletEntity = optionalUserWallet.get();
-        Wallet wallet = Wallet.of(walletEntity.getUserId(), walletEntity.getCreationDate(), walletEntity.getAmount());
-        return Optional.of(wallet);
+        if (optionalUserWallet.isPresent()) {
+            WalletEntity walletEntity = optionalUserWallet.get();
+            Wallet wallet = WalletMapper.from(walletEntity);
+            return Optional.of(wallet);
+        }
+        return Optional.empty();
     }
 
     @Override
     public Wallet saveOrUpdate(Wallet newWallet) {
-        this.walletRepository.save(null);
-        return null;
+        WalletEntity newWalletEntity = WalletMapper.from(newWallet);
+        WalletEntity savedWalletEntity = this.walletRepository.save(newWalletEntity);
+        return WalletMapper.from(savedWalletEntity);
     }
 
     @Override
     public Optional<Wallet> findById(Long walletId) {
         Optional<WalletEntity> walletEntity = this.walletRepository.findById(walletId);
-        return Optional.empty();
+        return walletEntity.map(WalletMapper::from);
     }
 }

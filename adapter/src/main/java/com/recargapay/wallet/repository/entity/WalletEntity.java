@@ -11,6 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,17 @@ public class WalletEntity {
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "WALLET_ID")
     private List<TransactionEntity> transactions;
+
+    public WalletEntity() {
+    }
+    
+    public WalletEntity(Long id, Long userId, LocalDateTime creationDate, float amount) {
+        this.id = id;
+        this.userId = userId;
+        this.creationDate = creationDate;
+        this.amount = amount;
+        this.transactions = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -72,52 +84,5 @@ public class WalletEntity {
 
     public void setTransactions(List<TransactionEntity> transactions) {
         this.transactions = transactions;
-    }
-
-    public static class WalletEntityBuilder {
-
-        private Long id;
-        private Long userId;
-        private LocalDateTime creationDate;
-        private float amount;
-        private List<TransactionEntity> transactions;
-
-        public WalletEntityBuilder() {
-        }
-
-        public WalletEntityBuilder withId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public WalletEntityBuilder withUserId(Long userId) {
-            this.userId = userId;
-            return this;
-        }
-
-        public WalletEntityBuilder withCreationDate(LocalDateTime creationDate) {
-            this.creationDate = creationDate;
-            return this;
-        }
-
-        public WalletEntityBuilder withAmount(float amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public WalletEntityBuilder withTransactions(List<TransactionEntity> transactions) {
-            this.transactions = transactions;
-            return this;
-        }
-
-        public WalletEntity build() {
-            WalletEntity walletEntity = new WalletEntity();
-            walletEntity.setId(this.id);
-            walletEntity.setUserId(this.userId);
-            walletEntity.setCreationDate(this.creationDate);
-            walletEntity.setAmount(this.amount);
-            walletEntity.setTransactions(this.transactions);
-            return walletEntity;
-        }
     }
 }

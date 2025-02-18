@@ -10,11 +10,11 @@ import java.util.Optional;
 
 public class Wallet {
 
-    private Long id;
-    private Long userId;
-    private LocalDateTime creationDate;
+    private final Long id;
+    private final Long userId;
+    private final LocalDateTime creationDate;
+    private final List<Transaction> transactions;
     private float amount;
-    private List<Transaction> transactions;
 
     public Wallet(Long id, Long userId, LocalDateTime creationDate, float amount) {
         this.id = id;
@@ -25,13 +25,15 @@ public class Wallet {
     }
 
     public static Wallet of(Long userId) {
-        Optional<Long> safeId = Optional.ofNullable(null);
-        return new Wallet(0L, userId,LocalDateTime.now(), 0);
+        return Wallet.of(userId, LocalDateTime.now(), 0);
     }
 
     public static Wallet of(Long userId, LocalDateTime creationDate, float amount) {
-        Optional<Long> safeId = Optional.ofNullable(null);
-        return new Wallet(0L, userId,creationDate, amount);
+        return Wallet.of(0L, userId, creationDate, amount);
+    }
+
+    public static Wallet of(Long id, Long userId, LocalDateTime creationDate, float amount) {
+        return new Wallet(id, userId, creationDate, amount);
     }
 
     public void add(Transaction transaction) {
@@ -83,9 +85,5 @@ public class Wallet {
 
     public LocalDateTime getCreationDate() {
         return creationDate;
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
     }
 }
