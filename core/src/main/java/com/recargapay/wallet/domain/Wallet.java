@@ -29,6 +29,11 @@ public class Wallet {
         return new Wallet(0L, userId,LocalDateTime.now(), 0);
     }
 
+    public static Wallet of(Long userId, LocalDateTime creationDate, float amount) {
+        Optional<Long> safeId = Optional.ofNullable(null);
+        return new Wallet(0L, userId,creationDate, amount);
+    }
+
     public void add(Transaction transaction) {
         switch (transaction.getType()) {
             case DEPOSIT, TRANSFER_IN:
@@ -74,5 +79,13 @@ public class Wallet {
 
     public float getAmount() {
         return amount;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 }
