@@ -92,7 +92,7 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 
 # Non Functional Requirements
 
-- All transactions made by a user (DEPOSIT, WITHDRAW and TRANSFERS) are registered in **Transaction** table database. This table contains improtant columns like transaction_date, wallet_id and transaction_type. These information could be heplful for future and possible auditing and traceability actions.
+- All transactions made by a user (DEPOSIT, WITHDRAW and TRANSFERS) are registered in **Transaction** table database. This table contains important columns like transaction_date, wallet_id and transaction_type. These information could be heplful for future and possible auditing and traceability actions.
 
 ### How to use and test project REST APIs:
 
@@ -121,7 +121,7 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 
 ### Steps
 
-Application should de runned in 2 ways: from repository code, or a jar inside the root folder of the project:
+Application should be runned in 2 ways: from repository code, or a jar inside the root folder of the project:
 
 #### From code repository: 
 
@@ -155,8 +155,6 @@ cd adapter
 ```shell
 java -jar adapter-0.0.1-SNAPSHOT.jar
 ```
-
-- **Important**: for both execution mode, Java 21 must be installed to run the application.
 
 **Technologies Used**
 
