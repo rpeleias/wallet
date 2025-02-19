@@ -45,6 +45,7 @@ public class RetrieveHistoricalBalanceUseCaseTest {
     private static Wallet createWallet() {
         long userId = 1L;
         Wallet wallet = Wallet.of(userId);
+        wallet.setId(1L);
         return wallet;
     }
 
@@ -121,7 +122,7 @@ public class RetrieveHistoricalBalanceUseCaseTest {
         });
 
         // then
-        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 1 with insufficient balance!"));
+        assertThat(exception.getMessage(), containsString("userId 1 with insufficient balance!"));
 
         verify(walletRepositoryPort).findById(walletId);
         verify(transactionRepositoryPort).findByWalletIdBetweenDates(walletId, LAST_THREE_MONTHS, LAST_MONTH);

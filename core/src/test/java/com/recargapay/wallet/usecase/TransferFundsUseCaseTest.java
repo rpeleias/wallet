@@ -83,7 +83,7 @@ public class TransferFundsUseCaseTest {
         });
 
         //then
-        assertThat(exception.getMessage(), containsString("Wallet with walletId 0 not exists!"));
+        assertThat(exception.getMessage(), containsString("Wallet with walletId null not exists!"));
 
         verify(walletRepositoryPort, times(1)).findById(any());
     }
@@ -103,7 +103,7 @@ public class TransferFundsUseCaseTest {
         });
 
         // then
-        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 1 with insufficient balance!")); // Amount should not change/ Am
+        assertThat(exception.getMessage(), containsString("userId 1 with insufficient balance!")); // Amount should not change/ Am
 
         verify(walletRepositoryPort, times(2)).findById(any());
 

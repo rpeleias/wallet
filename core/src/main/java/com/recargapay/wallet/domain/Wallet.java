@@ -5,20 +5,18 @@ import com.recargapay.wallet.exception.InsufficientBalanceException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class Wallet {
 
-    private final Long id;
+    private Long id;
     private final Long userId;
     private final LocalDateTime creationDate;
     private final List<Transaction> transactions;
     private float amount;
 
     public Wallet(Long id, Long userId, LocalDateTime creationDate, float amount) {
-        this(id, userId, creationDate, amount, Collections.emptyList());
+        this(id, userId, creationDate, amount, new ArrayList<>());
     }
 
     public Wallet(Long id, Long userId, LocalDateTime creationDate, float amount, List<Transaction> transactions) {
@@ -83,6 +81,10 @@ public class Wallet {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getUserId() {

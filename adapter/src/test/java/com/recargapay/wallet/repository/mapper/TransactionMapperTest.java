@@ -44,4 +44,23 @@ public class TransactionMapperTest {
         assertThat(transaction.getAmount()).isEqualByComparingTo(amount);
         assertThat(transaction.getTransactionDate()).isEqualTo(transactionDate);
     }
+
+    @Test
+    void whenTransactionIsInformedThenTransactionEntityShouldBeReturned() {
+        Long id = 1L;
+        Long walletId = 100L;
+        TransactionType type = TransactionType.DEPOSIT;
+        float amount = 500.0f;
+        LocalDateTime transactionDate = LocalDateTime.now();
+
+        Transaction transaction = Transaction.of(id, walletId, type, amount, transactionDate);
+
+        TransactionEntity transactionEntity = TransactionMapper.from(transaction);
+
+        assertThat(transactionEntity).isNotNull();
+        assertThat(transactionEntity.getWallet().getId()).isEqualTo(walletId);
+        assertThat(transactionEntity.getType()).isEqualTo(type);
+        assertThat(transactionEntity.getAmount()).isEqualByComparingTo(amount);
+        assertThat(transactionEntity.getTransactionDate()).isEqualTo(transactionDate);
+    }
 }

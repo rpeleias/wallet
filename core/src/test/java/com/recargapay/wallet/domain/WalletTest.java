@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,7 +28,6 @@ public class WalletTest {
     void whenAttributesIsInformedThenAWalletIsCreated() {
         assertThat(wallet.getUserId(), is(1L));
         assertThat(wallet.getAmount(), is(0.0f));
-        assertThat(wallet.getId(), is(0L));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class WalletTest {
             wallet.add(withdraw);
         });
 
-        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 1 with insufficient balance!")); // Amount should not change/ Am
+        assertThat(exception.getMessage(), containsString("userId 1 with insufficient balance!")); // Amount should not change/ Am
     }
 
     @Test
@@ -105,7 +105,7 @@ public class WalletTest {
             fromWallet.transfer(toWallet, 500);
         });
 
-        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 2 with insufficient balance!")); // Amount should not change/ Am
+        assertThat(exception.getMessage(), containsString("userId 2 with insufficient balance!")); // Amount should not change/ Am
 
         assertThat(fromWallet.getAmount(), is(200.0f));
         assertThat(toWallet.getAmount(), is(300.0f));

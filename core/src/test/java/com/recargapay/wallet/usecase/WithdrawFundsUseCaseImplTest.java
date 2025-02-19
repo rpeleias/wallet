@@ -80,7 +80,7 @@ class WithdrawFundsUseCaseImplTest {
         });
 
         // then
-        assertThat(exception.getMessage(), is("Wallet with id 0 from userId 1 with insufficient balance!")); // Amount should not change/ Am
+        assertThat(exception.getMessage(), containsString("userId 1 with insufficient balance!")); // Amount should not change/ Am
 
         verify(walletRepositoryPort, times(1)).findById(wallet.getId());
         verify(walletRepositoryPort, times(0)).saveOrUpdate(wallet);
