@@ -5,8 +5,8 @@ import com.recargapay.wallet.domain.Wallet;
 import com.recargapay.wallet.exception.WalletNotFoundException;
 import com.recargapay.wallet.port.in.command.WithdrawFundsCommand;
 import com.recargapay.wallet.port.in.usecase.WithdrawFundsUseCase;
-import com.recargapay.wallet.port.out.FundsWithdrawed;
-import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
+import com.recargapay.wallet.port.outh.FundsWithdrawed;
+import com.recargapay.wallet.port.outh.repository.WalletRepositoryPort;
 
 public class WithdrawFundsUseCaseImpl implements WithdrawFundsUseCase {
 

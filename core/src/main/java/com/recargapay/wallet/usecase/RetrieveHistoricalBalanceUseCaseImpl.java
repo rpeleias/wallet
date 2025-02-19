@@ -5,9 +5,9 @@ import com.recargapay.wallet.domain.Wallet;
 import com.recargapay.wallet.exception.WalletNotFoundException;
 import com.recargapay.wallet.port.in.command.RetrieveHistorialBalanceCommand;
 import com.recargapay.wallet.port.in.usecase.RetrieveHistorialBalanceUseCase;
-import com.recargapay.wallet.port.out.HistorialBalanceRetrieved;
-import com.recargapay.wallet.port.out.repository.TransactionRepositoryPort;
-import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
+import com.recargapay.wallet.port.outh.HistorialBalanceRetrieved;
+import com.recargapay.wallet.port.outh.repository.TransactionRepositoryPort;
+import com.recargapay.wallet.port.outh.repository.WalletRepositoryPort;
 
 import java.util.List;
 

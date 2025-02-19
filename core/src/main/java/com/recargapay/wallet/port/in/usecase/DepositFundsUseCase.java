@@ -1,7 +1,7 @@
 package com.recargapay.wallet.port.in.usecase;
 
 import com.recargapay.wallet.port.in.command.DepositFundsCommand;
-import com.recargapay.wallet.port.out.FundsDeposited;
+import com.recargapay.wallet.port.outh.FundsDeposited;
 
 public interface DepositFundsUseCase {
 

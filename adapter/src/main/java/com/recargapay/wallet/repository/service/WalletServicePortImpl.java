@@ -1,7 +1,7 @@
 package com.recargapay.wallet.repository.service;
 
 import com.recargapay.wallet.domain.Wallet;
-import com.recargapay.wallet.port.out.repository.WalletRepositoryPort;
+import com.recargapay.wallet.port.outh.repository.WalletRepositoryPort;
 import com.recargapay.wallet.repository.entity.WalletEntity;
 import com.recargapay.wallet.repository.impl.WalletRepository;
 import com.recargapay.wallet.repository.mapper.WalletMapper;
