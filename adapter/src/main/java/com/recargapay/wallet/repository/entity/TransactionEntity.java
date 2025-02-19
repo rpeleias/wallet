@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 public class TransactionEntity {
 
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -28,7 +29,7 @@ public class TransactionEntity {
     private WalletEntity wallet;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "TYPE", nullable = false)
+    @Column(name = "TRANSACTION_TYPE", nullable = false)
     private TransactionType type;
 
     @Column(name = "AMOUNT", nullable = false)
