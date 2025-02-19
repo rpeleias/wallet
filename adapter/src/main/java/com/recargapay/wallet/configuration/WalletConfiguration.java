@@ -32,7 +32,7 @@ public class WalletConfiguration {
 
     @Bean
     public RetrieveHistorialBalanceUseCase retrieveHistorialBalanceUseCase(WalletRepositoryPort walletServicePort, TransactionRepositoryPort transactionServicePort) {
-        return new RetrieveHistoricalBalanceUseCaseImpl(null, transactionServicePort);
+        return new RetrieveHistoricalBalanceUseCaseImpl(walletServicePort, transactionServicePort);
     }
 
     @Bean

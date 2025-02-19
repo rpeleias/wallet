@@ -2,6 +2,7 @@ package com.recargapay.wallet.repository.service;
 
 import com.recargapay.wallet.domain.Transaction;
 import com.recargapay.wallet.repository.entity.TransactionEntity;
+import com.recargapay.wallet.repository.entity.WalletEntity;
 import com.recargapay.wallet.repository.impl.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,9 +30,11 @@ class TransactionServicePortImplTest {
     private TransactionServicePortImpl transactionService;
 
     private static TransactionEntity createTransactionEntity(Long walletId) {
+        WalletEntity walletEntity = new WalletEntity(walletId);
+
         TransactionEntity transactionEntity = new TransactionEntity();
         transactionEntity.setId(1L);
-        transactionEntity.setWalletId(walletId);
+        transactionEntity.setWallet(walletEntity);
         transactionEntity.setTransactionDate(LocalDateTime.now());
         transactionEntity.setAmount(100.0f);
         return transactionEntity;

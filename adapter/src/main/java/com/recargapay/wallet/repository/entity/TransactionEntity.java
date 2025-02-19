@@ -8,18 +8,24 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "TRANSACTION", indexes = {@Index(name = "IDX_TYPE", columnList = "TYPE")})
 public class TransactionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Geração automática do ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "WALLET_ID", nullable = false)
-    private Long walletId;
+    @ManyToOne
+    @JoinColumn(name = "WALLET_ID", nullable = false)
+    private WalletEntity wallet;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE", nullable = false)
@@ -31,6 +37,15 @@ public class TransactionEntity {
     @Column(name = "TRANSACTION_DATE", nullable = false)
     private LocalDateTime transactionDate;
 
+    public TransactionEntity() {}
+
+    public TransactionEntity(WalletEntity wallet, TransactionType type, float amount, LocalDateTime transactionDate) {
+        this.wallet = wallet;
+        this.type = type;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+    }
+
     public Long getId() {
         return id;
     }
@@ -39,12 +54,12 @@ public class TransactionEntity {
         this.id = id;
     }
 
-    public Long getWalletId() {
-        return walletId;
+    public WalletEntity getWallet() {
+        return wallet;
     }
 
-    public void setWalletId(Long walletId) {
-        this.walletId = walletId;
+    public void setWallet(WalletEntity wallet) {
+        this.wallet = wallet;
     }
 
     public TransactionType getType() {

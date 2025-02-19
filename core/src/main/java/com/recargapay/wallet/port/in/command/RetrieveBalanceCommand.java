@@ -7,7 +7,9 @@ public class RetrieveBalanceCommand {
 
     @NotNull
     @NotEmpty
-    private final Long walletId;
+    private Long walletId;
+
+    public RetrieveBalanceCommand() {}
 
     private RetrieveBalanceCommand(Long walletId) {
         this.walletId = walletId;

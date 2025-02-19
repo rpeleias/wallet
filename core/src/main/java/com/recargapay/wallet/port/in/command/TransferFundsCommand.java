@@ -17,6 +17,8 @@ public class TransferFundsCommand {
     @NotEmpty
     private BigDecimal value;
 
+    public TransferFundsCommand() {}
+
     public TransferFundsCommand(Long fromWalletId, Long toWalletId, BigDecimal value) {
         this.fromWalletId = fromWalletId;
         this.toWalletId = toWalletId;

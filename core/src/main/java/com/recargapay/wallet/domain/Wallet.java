@@ -5,6 +5,7 @@ import com.recargapay.wallet.exception.InsufficientBalanceException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +18,15 @@ public class Wallet {
     private float amount;
 
     public Wallet(Long id, Long userId, LocalDateTime creationDate, float amount) {
+        this(id, userId, creationDate, amount, Collections.emptyList());
+    }
+
+    public Wallet(Long id, Long userId, LocalDateTime creationDate, float amount, List<Transaction> transactions) {
         this.id = id;
         this.userId = userId;
         this.creationDate = creationDate;
         this.amount = amount;
-        this.transactions = new ArrayList<>();
+        this.transactions = transactions;
     }
 
     public static Wallet of(Long userId) {
@@ -29,11 +34,15 @@ public class Wallet {
     }
 
     public static Wallet of(Long userId, LocalDateTime creationDate, float amount) {
-        return Wallet.of(0L, userId, creationDate, amount);
+        return Wallet.of(null, userId, creationDate, amount);
     }
 
     public static Wallet of(Long id, Long userId, LocalDateTime creationDate, float amount) {
         return new Wallet(id, userId, creationDate, amount);
+    }
+
+    public static Wallet of(Long id, Long userId, LocalDateTime creationDate, float amount, List<Transaction> transactions) {
+        return new Wallet(id, userId, creationDate, amount, transactions);
     }
 
     public void add(Transaction transaction) {
@@ -60,6 +69,7 @@ public class Wallet {
     }
 
     public void calculateHistoricalAmount(List<Transaction> transactions) {
+        this.amount = 0;
         transactions.forEach(this::add);
     }
 
@@ -85,5 +95,9 @@ public class Wallet {
 
     public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 }

@@ -21,6 +21,9 @@ public class TransferFundsUseCaseImpl implements TransferFundsUseCase {
         Wallet toWallet = walletRepositoryPort.findById(command.getToWalletId()).orElseThrow(() -> new WalletNotFoundException(command.getToWalletId()));
 
         fromWallet.transfer(toWallet, command.getValue().floatValue());
+
+        walletRepositoryPort.saveOrUpdate(fromWallet);
+        walletRepositoryPort.saveOrUpdate(toWallet);
         return FundsTransfered.from(command.getFromWalletId(), command.getToWalletId(), command.getValue().floatValue(), fromWallet.getAmount(), toWallet.getAmount());
     }
 }

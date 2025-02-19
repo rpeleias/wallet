@@ -3,9 +3,11 @@ package com.recargapay.wallet.repository.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "WALLET")
+@Table(name = "WALLET", indexes = {@Index(name = "IDX_USER_ID", columnList = "USER_ID")})
 public class WalletEntity {
 
     @Id
@@ -31,19 +33,23 @@ public class WalletEntity {
     @Column(name = "AMOUNT", nullable = false)
     private float amount;
 
-    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JoinColumn(name = "WALLET_ID")
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<TransactionEntity> transactions;
 
     public WalletEntity() {
+        this.transactions = new ArrayList<>();
     }
-    
-    public WalletEntity(Long id, Long userId, LocalDateTime creationDate, float amount) {
+
+    public WalletEntity(Long id) {
+        this.id = id;
+    }
+
+    public WalletEntity(Long id, Long userId, LocalDateTime creationDate, float amount, List<TransactionEntity> transactions) {
         this.id = id;
         this.userId = userId;
         this.creationDate = creationDate;
         this.amount = amount;
-        this.transactions = new ArrayList<>();
+        this.transactions = transactions;
     }
 
     public Long getId() {

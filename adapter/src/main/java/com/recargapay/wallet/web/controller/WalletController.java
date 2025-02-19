@@ -1,4 +1,4 @@
-package com.recargapay.wallet.web;
+package com.recargapay.wallet.web.controller;
 
 import com.recargapay.wallet.port.in.command.DepositFundsCommand;
 import com.recargapay.wallet.port.in.command.RetrieveBalanceCommand;
@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/wallets")
-public class WalletController {
+public class WalletController implements WalletControllerDocs {
 
     private final WalletCreationUseCase walletCreationUseCase;
     private final RetrieveBalanceUseCase retrieveBalanceUseCase;
@@ -58,15 +58,15 @@ public class WalletController {
     }
 
     @GetMapping("{walletId}/balance")
-    public ResponseEntity<BalanceRetrieved> retrieveBalance(@PathVariable String walletId) {
-        RetrieveBalanceCommand command = RetrieveBalanceCommand.of(Long.getLong(walletId));
+    public ResponseEntity<BalanceRetrieved> retrieveBalance(@PathVariable Long walletId) {
+        RetrieveBalanceCommand command = RetrieveBalanceCommand.of(walletId);
         BalanceRetrieved balanceRetrieved = retrieveBalanceUseCase.retrieve(command);
         return ResponseEntity.ok(balanceRetrieved);
     }
 
     @GetMapping("{walletId}/balance/history")
-    public ResponseEntity<HistorialBalanceRetrieved> retrieveHistorialBalance(@PathVariable String walletId, @RequestParam @DateTimeFormat LocalDateTime from, @RequestParam @DateTimeFormat LocalDateTime to) {
-        RetrieveHistorialBalanceCommand command = RetrieveHistorialBalanceCommand.of(Long.getLong(walletId), from, to);
+    public ResponseEntity<HistorialBalanceRetrieved> retrieveHistorialBalance(@PathVariable Long walletId, @RequestParam @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss") LocalDateTime from, @RequestParam @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss") LocalDateTime to) {
+        RetrieveHistorialBalanceCommand command = RetrieveHistorialBalanceCommand.of(walletId, from, to);
         HistorialBalanceRetrieved historialBalanceRetrieved = retrieveHistorialBalanceUseCase.retrieve(command);
         return ResponseEntity.ok(historialBalanceRetrieved);
     }

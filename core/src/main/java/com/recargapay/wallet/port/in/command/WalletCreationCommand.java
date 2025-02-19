@@ -9,6 +9,8 @@ public class WalletCreationCommand {
     @NotEmpty
     private Long userId;
 
+    public WalletCreationCommand() {}
+
     public WalletCreationCommand(Long userId) {
         this.userId = userId;
     }

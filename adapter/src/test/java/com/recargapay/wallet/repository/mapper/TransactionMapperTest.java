@@ -3,6 +3,7 @@ package com.recargapay.wallet.repository.mapper;
 import com.recargapay.wallet.domain.Transaction;
 import com.recargapay.wallet.domain.TransactionType;
 import com.recargapay.wallet.repository.entity.TransactionEntity;
+import com.recargapay.wallet.repository.entity.WalletEntity;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -12,9 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TransactionMapperTest {
 
     private static TransactionEntity createTransactionEntity(Long id, Long walletId, TransactionType type, float amount, LocalDateTime transactionDate) {
+        WalletEntity walletEntity = new WalletEntity(walletId);
+
         TransactionEntity transactionEntity = new TransactionEntity();
         transactionEntity.setId(id);
-        transactionEntity.setWalletId(walletId);
+
+        transactionEntity.setWallet(walletEntity);
         transactionEntity.setType(type);
         transactionEntity.setAmount(amount);
         transactionEntity.setTransactionDate(transactionDate);

@@ -5,6 +5,7 @@ import com.recargapay.wallet.repository.entity.WalletEntity;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +21,7 @@ public class WalletMapperTest {
         LocalDateTime creationDate = LocalDateTime.now();
         float amount = 500.0f;
 
-        WalletEntity walletEntity = new WalletEntity(walletId, userId, creationDate, amount);
+        WalletEntity walletEntity = new WalletEntity(walletId, userId, creationDate, amount, Collections.emptyList());
 
         Wallet wallet = WalletMapper.from(walletEntity);
 

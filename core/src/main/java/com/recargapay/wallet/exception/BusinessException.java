@@ -1,11 +1,10 @@
 package com.recargapay.wallet.exception;
 
-public class BusinessException extends  RuntimeException {
+public class BusinessException extends RuntimeException {
 
     protected int errorCode;
 
-    public BusinessException(String message, int errorCode) {
+    public BusinessException(String message) {
         super(message);
-        this.errorCode = errorCode;
     }
 }

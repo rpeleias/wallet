@@ -10,16 +10,17 @@ public class RetrieveHistorialBalanceCommand {
 
     @NotNull
     @NotEmpty
-    private final Long walletId;
+    private Long walletId;
 
     @NotNull
     @PastOrPresent
-    private final LocalDateTime from;
+    private LocalDateTime from;
 
     @NotNull
     @PastOrPresent
-    private final LocalDateTime to;
+    private LocalDateTime to;
 
+    public RetrieveHistorialBalanceCommand() {}
 
     private RetrieveHistorialBalanceCommand(Long walletId, LocalDateTime from, LocalDateTime to) {
         this.walletId = walletId;
