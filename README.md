@@ -90,6 +90,15 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 }
 ```
 
+# Non Functional Requirements
+
+- All transactions made by a user (DEPOSIT, WITHDRAW and TRANSFERS) are registered in **Transaction** table database. This table contains improtant columns like transaction_date, wallet_id and transaction_type. These information could be heplful for future and possible auditing and traceability actions.
+
+### How to use and test project REST APIs:
+
+- Access the application by Swagger URL at http://localhost:8080/swagger-ui/index.html. All endpoints are available for tests, and already with populated datas on **Wallet** and **Transaction** database table.
+
+
 ## Important Links
 
 - **Swagger UI**: http://localhost:8080/swagger-ui/index.html
@@ -139,9 +148,6 @@ cd adapter
 ```shell
 ./gradlew bootRun
 ```
-
-Access the application at http://localhost:8080.
-
 #### From generated jar inside root folder:
 
 - Execute jar file adapter-0.0.1-SNAPSHOT.jar:
@@ -151,8 +157,6 @@ java -jar adapter-0.0.1-SNAPSHOT.jar
 ```
 
 - **Important**: for both execution mode, Java 21 must be installed to run the application.
-
-Access the application at http://localhost:8080.
 
 **Technologies Used**
 
