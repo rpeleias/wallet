@@ -5,9 +5,9 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 
 ---
 
-## REST Endpoints
+# Functional requirements
 
-### Wallet Management
+## Wallet Management
 
 ## Wallet Creation
 
@@ -18,7 +18,7 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 - **Request Body:**
   ```json
   {
-    "userId": 1,
+    "userId": 1
   }
   ```
   
@@ -92,7 +92,7 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 
 ## Important Links
 
-- **Swagger UI**: http://localhost:8080/swagger-ui.html
+- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
 - **H2 Database Console**: http://localhost:8080/h2-console
 
 - **Default Credentials**:
@@ -111,11 +111,19 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 - Gradle
 
 ### Steps
+
+Application should de runned in 2 ways: from repository code, or a jar inside the root folder of the project:
+
+#### From code repository: 
+
 - Clone the repository:
  
 ```shell
 git clone https://github.com/your-username/your-repository.git
 ```
+
+- Navigate to **adapter** folder
+
 ```shell 
 cd adapter
 ```
@@ -131,6 +139,18 @@ cd adapter
 ```shell
 ./gradlew bootRun
 ```
+
+Access the application at http://localhost:8080.
+
+#### From generated jar inside root folder:
+
+- Execute jar file adapter-0.0.1-SNAPSHOT.jar:
+
+```shell
+java -jar adapter-0.0.1-SNAPSHOT.jar
+```
+
+- **Important**: for both execution mode, Java 21 must be installed to run the application.
 
 Access the application at http://localhost:8080.
 

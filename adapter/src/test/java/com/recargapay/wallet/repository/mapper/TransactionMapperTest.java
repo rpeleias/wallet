@@ -8,7 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class TransactionMapperTest {
 
@@ -37,12 +40,11 @@ public class TransactionMapperTest {
 
         Transaction transaction = TransactionMapper.from(transactionEntity);
 
-        assertThat(transaction).isNotNull();
-        assertThat(transaction.getId()).isEqualTo(id);
-        assertThat(transaction.getWalletId()).isEqualTo(walletId);
-        assertThat(transaction.getType()).isEqualTo(type);
-        assertThat(transaction.getAmount()).isEqualByComparingTo(amount);
-        assertThat(transaction.getTransactionDate()).isEqualTo(transactionDate);
+        assertThat(transaction.getId(), is(id));
+        assertThat(transaction.getWalletId(), is(walletId));
+        assertThat(transaction.getType(), is(type));
+        assertThat(transaction.getAmount(), is(amount));
+        assertThat(transaction.getTransactionDate(), is(transactionDate));
     }
 
     @Test
@@ -57,10 +59,10 @@ public class TransactionMapperTest {
 
         TransactionEntity transactionEntity = TransactionMapper.from(transaction);
 
-        assertThat(transactionEntity).isNotNull();
-        assertThat(transactionEntity.getWallet().getId()).isEqualTo(walletId);
-        assertThat(transactionEntity.getType()).isEqualTo(type);
-        assertThat(transactionEntity.getAmount()).isEqualByComparingTo(amount);
-        assertThat(transactionEntity.getTransactionDate()).isEqualTo(transactionDate);
+        assertThat(transactionEntity.getId(), is(nullValue()));
+        assertThat(transactionEntity.getWallet().getId(), is(walletId));
+        assertThat(transactionEntity.getType(), is(type));
+        assertThat(transactionEntity.getAmount(), is(amount));
+        assertThat(transactionEntity.getTransactionDate(), is(transactionDate));
     }
 }

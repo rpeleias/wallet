@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.Collections;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class WalletMapperTest {
 
     @Test
-    void testFromWalletEntityToWallet() {
+    void whenWalletIsInformedThenItShouldBeConvertedToWalletEntity() {
         // Arrange
         Long walletId = 1L;
         Long userId = 100L;
@@ -27,14 +28,14 @@ public class WalletMapperTest {
 
         // Assert
         assertNotNull(wallet);
-        assertThat(walletId).isEqualTo(wallet.getId());
-        assertThat(userId).isEqualTo(wallet.getUserId());
-        assertThat(creationDate).isEqualTo(wallet.getCreationDate());
-        assertThat(amount).isEqualTo(wallet.getAmount());
+        assertThat(walletId, is(wallet.getId()));
+        assertThat(userId, is(wallet.getUserId()));
+        assertThat(creationDate, is(wallet.getCreationDate()));
+        assertThat(amount, is(wallet.getAmount()));
     }
 
     @Test
-    void testFromWalletToWalletEntity() {
+    void whenWalletEntityIsInformedThenItShouldBeConvertedToWallet() {
         // Arrange
         Long walletId = 1L;
         Long userId = 100L;
