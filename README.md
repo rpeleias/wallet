@@ -8,8 +8,8 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 ## REST Endpoints
 
 ### Wallet Management
- 
-- **Create Wallet**
+
+## Wallet Creation
 
 **POST** `/wallets`  
   
@@ -18,8 +18,7 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 - **Request Body:**
   ```json
   {
-    "name": "string",
-    "email": "string"
+    "userId": 1,
   }
   ```
   
@@ -93,13 +92,16 @@ The Wallet API is a RESTful service designed for managing digital wallets. It pr
 
 ## Important Links
 
-**Swagger UI**: http://localhost:8080/swagger-ui.html
-**H2 Database Console**: http://localhost:8080/h2-console
+- **Swagger UI**: http://localhost:8080/swagger-ui.html
+- **H2 Database Console**: http://localhost:8080/h2-console
 
-**Default Credentials**:
-JDBC URL: jdbc:h2:mem:testdb
-User: wallet
-Password: wallet
+- **Default Credentials**:
+
+  - JDBC URL: jdbc:h2:mem:testdb
+  
+  - User: wallet
+  
+  - Password: wallet
 
 ## How to Run the Project
 
